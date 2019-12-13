@@ -1,1 +1,1 @@
-testf
+testf --changed
