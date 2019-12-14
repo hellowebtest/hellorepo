@@ -6,4 +6,5 @@ SELECT OrderNumber, TotalAmount, FirstName, LastName, City, Country
     ON O.CustomerId = C.Id-- this changed
 
 -- sql comment added
++ test
 ORDER BY TotalAmount
