@@ -4,4 +4,6 @@ SELECT OrderNumber, TotalAmount, FirstName, LastName, City, Country
 --this too[2]
   FROM Customer C LEFT JOIN [Order] O --comment additional
     ON O.CustomerId = C.Id-- this changed
+
+-- sql comment added
 ORDER BY TotalAmount
