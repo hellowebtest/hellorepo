@@ -25,7 +25,7 @@ WITH
 SELECT sales.product_key AS PROD_KEY,
  SUM(CAST (inventory.quantity_shipped AS BIGINT)) AS INV_SHIPPED,
  SUM(CAST (sales.quantity AS BIGINT)) AS PROD_QUANTITY,
- RANK() OVER ( ORDER BY SUM(CAST (sales.quantity AS BIGINT)) DESC) AS PROD_RANK
+ RANK() OVER ( ORDER BY SUM(CAST (sales.quantity AS BIGINT)) DESC) AS PROD_RANK --one
 FROM sales, inventory
  WHERE sales.product_key = inventory.product_key
 GROUP BY sales.product_key;
@@ -71,7 +71,7 @@ WITH
        gosalesdw.sls_sales_fact AS sf
   WHERE pd.product_key = sf.product_key
     AND pd.product_number > 10000
-    AND pd.base_product_key > 30
+    AND pd.base_product_key > 300 --two
     AND md.order_method_key = sf.order_method_key
     AND md.order_method_code > 5
     AND ed.employee_key = sf.employee_key
