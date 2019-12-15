@@ -64,12 +64,6 @@ FROM sales, inventory
 GROUP BY sales.product_key;
 WITH
  sales AS
- (SELECT sf.*
-  FROM gosalesdw.sls_order_method_dim AS md,
-       gosalesdw.sls_product_dim AS pd,
-       gosalesdw.emp_employee_dim AS ed,
-       gosalesdw.sls_sales_fact AS sf
-  WHERE pd.product_key = sf.product_key
     AND pd.product_number > 10000
     AND pd.base_product_key > 300 --two
     AND md.order_method_key = sf.order_method_key
@@ -85,6 +79,7 @@ WITH
 SELECT sales.product_key AS PROD_KEY,
  SUM(CAST (inventory.quantity_shipped AS BIGINT)) AS INV_SHIPPED,
  SUM(CAST (sales.quantity AS BIGINT)) AS PROD_QUANTITY,
+ --added
  RANK() OVER ( ORDER BY SUM(CAST (sales.quantity AS BIGINT)) DESC) AS PROD_RANK
 FROM sales, inventory
  WHERE sales.product_key = inventory.product_key
